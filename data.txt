@@ -1,279 +1,33 @@
 MAIN
-{NAME} ({CLASS}){\n}{PRIMARY}{\n}{SECONDARY}
+{INSULT}
+{INSULT}
+{INSULT}
+{INSULT}
+{Insult}
+{INSULT}!
+{INSULT}!
+{INSULT}!!!!
+{INSULT}!!!!
+{INSULT}?
+{INSULT}????
+{INSULT}?!?!?!?!
 
-PRIMARY
-Used to treat {SYNDROME}
-Treats the {adjective} symptoms of {SYNDROME}
-Cures {SYNDROME}
-Approved to treat {SYNDROME} and {SYNDROME}
-Prescribed for {SYNDROME}
-Used with {EXISTENT} to treat {SYNDROME}
-Used recreationally as {CLASS:indefinite}
-Used recreationally for {verbing}
+INSULT
+{START} {END}
+What the {WORD} did you say to me you little {WORD}?
 
-SECONDARY
-Developed after {year} {Noun} Pandemic
-Often used off-label for {SYNDROME}
-Notable for its {adjective} effect
-Controlled in the US due to its {adjective} effect
-Developed in {year} to replace {EXISTENT}
-May cause {ADJECTIVE} feelings
-Obsoleted by {EXISTENT}
-Contraindicated by {SYNDROME}
-Contraindicated by {EXISTENT}
-Decreases the {adjective} effects of {EXISTENT}
+INSULT,START
+{WORD} off
+{WORD} you
+{WORD} you and the horse you rode in on
+{WORD} you in particular
+go {WORD} yourself
+go to {WORD}
+leave me the {WORD} alone
+you're a piece of {WORD}
+what the {WORD}
+what the {WORD}ing {WORD}
+kindly catch the 9am train to {Word}sville
 
-SYNDROME
-irritable {noun} syndrome
-{adjective} {noun} syndrome
-severe {noun}
-major {adjective} disorder
-{adjective} {noun} disorder
-obsessive {noun} disorder
-clinical {noun}
-{adjective} personality disorder
-respiratory {adjective} disease
-{bodypart} cancer
-restless {bodypart}
-{bodypart} failure
-congenital {noun} disease
-{FamousName}'s disease
-{adjective} fever
-hypo{noun}ism
-{EXISTENT} overdose
-{CLASS} overdose
-{CLASS} discontinuation syndrome
-{noun} syndrome
-low {ATTRIBUTE}
-
-CLASSIFIER
-{CLASS:indefinite}
-{NAME}
-{EXISTENT}
-
-CLASS
-analgesic
-painkiller
-anaesthetic
-antihistamine
-anticonvulsant
-antiepileptic
-antidepressant
-antimigraine
-antipsychotic
-benzodiazepine
-antiparkinsonian
-immunosuppressive
-antianaemia
-anticoagulant
-blood thinner
-antiarrhythmic
-antithrombotic
-antifungal
-anti-infective
-anti-inflammatory
-disinfectant
-antiseptic
-antiemetic
-diuretic
-opiod painkiller
-antiulcer
-laxative
-sedative
-hormone
-estrogen
-androgen
-contraceptive
-ovulation inducer
-thyroid stimulant
-antithyroid
-insulin
-vaccine
-oxytocin
-SSRI
-anxiolytic
-antipanic agent
-tricyclic
-tetracyclic
-MAOI
-SNRI
-antiandrogen
-psychedelic
-vitamin
-probiotic
-antibiotic
-antiviral drug
-stimulant
-depressant
-aphrodisiac
-{EXISTENT} prodrug
-
-EXISTENT
-fluoxetine
-Prozac
-sertraline
-Zoloft
-escitalopram
-Lexapro
-venlafaxine
-Effexor
-aripiprazole
-Abilify
-alprazolam
-Xanax
-diazepam
-Valium
-lamotrigine
-Lamictal
-gabapentin
-Neurontin
-acetaminophen
-Tylenol
-ibuprofin
-Advil
-lurasidone
-Latuda
-lithium
-activated charcoal
-estradiol
-AndroGel
-ziprasidone
-Geodon
-risperidone
-Risperdal
-quetiapine
-Seroquel
-Cymbalta
-duloxetine
-bupropion
-Welbutrin
-buspirone
-Buspar
-oxycontin
-Oxycodone
-Concerta
-methylphenidate
-Ritalin
-Vyvanse
-lisdexamfetamine
-Adderall
-epinephrine
-adrenaline
-testosterone gel
-Cialis
-Viagra
-heroin
-morphine
-crystal meth
-mirtazapine
-Remeron
-Luvox
-fluvoxamine
-
-NAME
-{PRENAME}{NAMEMID}{NAMEIFX}
-
-PRENAME
-Oxy
-Ari
-Zi
-Quetia
-Mor
-Her
-Cia
-Via
-He
-Con
-Flu
-Ser
-Es
-Ven
-Al
-Dia
-Lamo
-Gaba
-Aceta
-Ibu
-Lura
-Ris
-Li
-Estra
-Du
-Bus
-Epin
-Co
-Lido
-Pro
-Pri
-Bu
-Levo
-Ro
-Me
-Dibu
-Des
-Ha
-Mir
-
-NAMEMID
-pipra
-pi
-to
-stero
-cer
-oxe
-tra
-cita
-lo
-la
-fa
-pra
-zo
-ze
-tri
-pen
-mino
-pro
-si
-peri
-thi
-loxe
-con
-epher
-piva
-bupi
-va
-piva
-flu
-oxy
-taz
-{NAMEMID}{NAMEMID}
-{NAMEMID}{NAMEMID}
-
-NAMEIFX
-zole
-ne
-tine
-lin
-tamine
-gra
-phine
-ta
-line
-pram
-xine
-lam
-pam
-gine
-tin
-phen
-fin
-done
-um
-diol
-tin
-rone
-ine
-caine
-rane
-ide
-epine
+INSULT,END
+you piece of {WORD}
