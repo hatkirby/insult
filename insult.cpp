@@ -7,6 +7,7 @@
 #include <random>
 #include <chrono>
 #include <thread>
+#include <algorithm>
 #include "patterner.h"
 
 int main(int argc, char** argv)

@@ -1,6 +1,7 @@
 #include "patterner.h"
 #include <fstream>
 #include <stdexcept>
+#include <algorithm>
 
 patterner::patterner(
   std::string datapath,
