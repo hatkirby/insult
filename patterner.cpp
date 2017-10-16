@@ -47,92 +47,123 @@ patterner::patterner(
 std::string patterner::generate()
 {
   std::string action = "{MAIN}";
-  int tknloc;
-  while ((tknloc = action.find("{")) != std::string::npos)
+
+  verbly::filter slurBlacklist =
+    (verbly::word::usageDomains %= (
+      (verbly::notion::wnid == 106718862) // ethnic slur
+      || (verbly::notion::wnid == 106717170) // disparagement (other slurs)
+      || (verbly::notion::wnid == 107124340))); // obscenity (other profanity)
+
+  while (action == "{MAIN}")
   {
-    std::string token = action.substr(tknloc+1, action.find("}")-tknloc-1);
-    std::string modifier;
-    int modloc;
-    if ((modloc = token.find(":")) != std::string::npos)
+    int tknloc;
+    while ((tknloc = action.find("{")) != std::string::npos)
     {
-      modifier = token.substr(modloc+1);
-      token = token.substr(0, modloc);
-    }
-
-    std::string canontkn;
-    std::transform(std::begin(token), std::end(token),
-        std::back_inserter(canontkn), [] (char ch) {
-      return std::toupper(ch);
-    });
-
-    std::string result;
-    if (canontkn == "WORD")
-    {
-      result = data_.words(
-        (verbly::word::forms(verbly::inflection::base) %=
-          (verbly::form::complexity == 1)
-            && (verbly::form::length == 4)
-            && (verbly::form::proper == false)
-            && (verbly::pronunciation::numOfSyllables == 1))
-        && !(verbly::word::usageDomains %=
-          (verbly::notion::wnid == 106718862))) // Blacklist ethnic slurs
-        .first().getBaseForm().getText();
-    } else if (canontkn == "\\N")
-    {
-      result = "\n";
-    } else {
-      auto group = groups_[canontkn];
-      std::uniform_int_distribution<int> groupdist(0, group.size()-1);
-      int groupind = groupdist(rng_);
-      result = group[groupind];
-    }
-
-    if (modifier == "indefinite")
-    {
-      if ((result.length() > 1) && (isupper(result[0])) && (isupper(result[1])))
+      std::string token = action.substr(tknloc+1, action.find("}")-tknloc-1);
+      std::string modifier;
+      int modloc;
+      if ((modloc = token.find(":")) != std::string::npos)
       {
-        result = "an " + result;
-      } else if ((result[0] == 'a') || (result[0] == 'e') || (result[0] == 'i') || (result[0] == 'o') || (result[0] == 'u'))
-      {
-        result = "an " + result;
-      } else {
-        result = "a " + result;
+        modifier = token.substr(modloc+1);
+        token = token.substr(0, modloc);
       }
-    }
 
-    std::string finalresult;
-    if (islower(token[0]))
-    {
-      std::transform(std::begin(result), std::end(result), std::back_inserter(finalresult), [] (char ch) {
-        return std::tolower(ch);
+      std::string canontkn;
+      std::transform(std::begin(token), std::end(token),
+          std::back_inserter(canontkn), [] (char ch) {
+        return std::toupper(ch);
       });
-    } else if (isupper(token[0]) && !isupper(token[1]))
-    {
-      auto words = verbly::split<std::list<std::string>>(result, " ");
-      for (auto& word : words)
-      {
-        if (word[0] == '{')
-        {
-          word[1] = std::toupper(word[1]);
 
-          for (int k=2; k<word.length(); k++)
-          {
-            if (std::isalpha(word[k]))
-            {
-              word[k] = std::tolower(word[k]);
-            }
-          }
+      std::string result;
+      if (canontkn == "WORD2")
+      {
+        result = data_.words(
+          (verbly::notion::partOfSpeech == verbly::part_of_speech::noun)
+          && (verbly::word::forms(verbly::inflection::base) %=
+            (verbly::form::complexity == 1)
+              && (verbly::form::length == 4)
+              && (verbly::form::proper == false)
+              && (verbly::pronunciation::numOfSyllables == 1))
+          && !slurBlacklist)
+          .first().getBaseForm().getText();
+      } else if (canontkn == "\\N")
+      {
+        result = "\n";
+      } else {
+        auto group = groups_[canontkn];
+        std::uniform_int_distribution<int> groupdist(0, group.size()-1);
+        int groupind = groupdist(rng_);
+        result = group[groupind];
+      }
+
+      if (modifier == "indefinite")
+      {
+        if ((result.length() > 1) && (isupper(result[0])) && (isupper(result[1])))
+        {
+          result = "an " + result;
+        } else if ((result[0] == 'a') || (result[0] == 'e') || (result[0] == 'i') || (result[0] == 'o') || (result[0] == 'u'))
+        {
+          result = "an " + result;
         } else {
-          word[0] = std::toupper(word[0]);
+          result = "a " + result;
         }
       }
 
-      finalresult = verbly::implode(std::begin(words), std::end(words), " ");
-    } else {
-      finalresult = result;
+      std::string finalresult;
+      if (islower(token[0]))
+      {
+        std::transform(std::begin(result), std::end(result), std::back_inserter(finalresult), [] (char ch) {
+          return std::tolower(ch);
+        });
+      } else if (isupper(token[0]) && !isupper(token[1]))
+      {
+        auto words = verbly::split<std::list<std::string>>(result, " ");
+        for (auto& word : words)
+        {
+          if (word[0] == '{')
+          {
+            word[1] = std::toupper(word[1]);
+
+            for (int k=2; k<word.length(); k++)
+            {
+              if (std::isalpha(word[k]))
+              {
+                word[k] = std::tolower(word[k]);
+              }
+            }
+          } else {
+            word[0] = std::toupper(word[0]);
+          }
+        }
+
+        finalresult = verbly::implode(std::begin(words), std::end(words), " ");
+      } else {
+        finalresult = result;
+      }
+
+      action.replace(tknloc, action.find("}")-tknloc+1, finalresult);
     }
 
-    action.replace(tknloc, action.find("}")-tknloc+1, finalresult);
+    std::string canonical;
+    std::transform(std::begin(action), std::end(action),
+      std::back_inserter(canonical), [] (char ch)
+    {
+      return std::tolower(ch);
+    });
+
+    std::list<std::string> words =
+      verbly::split<std::list<std::string>>(canonical, " ");
+
+    for (std::string word : words)
+    {
+      if (!data_.forms(
+        (verbly::form::text == word)
+        && slurBlacklist).all().empty())
+      {
+        action = "{MAIN}";
+        break;
+      }
+    }
   }
 
   return action;
