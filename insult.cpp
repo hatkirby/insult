@@ -34,17 +34,20 @@ int main(int argc, char** argv)
 
   try
   {
+    std::set<twitter::user_id> blocks = client.getBlocks();
+
     verbly::database database(config["verbly_datafile"].as<std::string>());
     patterner pgen(config["forms_file"].as<std::string>(), database, rng);
 
     std::cout << "Starting streaming..." << std::endl;
 
-    twitter::stream userStream(client, [&pgen, &client]
+    twitter::stream userStream(client, [&pgen, &client, &blocks]
       (const twitter::notification& n) {
         if (n.getType() == twitter::notification::type::tweet)
         {
           if ((!n.getTweet().isRetweet())
-            && (n.getTweet().getAuthor() != client.getUser()))
+            && (n.getTweet().getAuthor() != client.getUser())
+            && (!blocks.count(n.getTweet().getAuthor().getID())))
           {
             std::string original = n.getTweet().getText();
             std::string canonical;
