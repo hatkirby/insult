@@ -14,7 +14,7 @@ MAIN
 
 INSULT
 {START} {END}
-What the {WORD} did you say to me you little {WORD}?
+What the {WORD} did you say to me you little {WORD}
 
 INSULT,START
 {WORD} off
@@ -30,6 +30,7 @@ what the {WORD}ing {WORD}
 kindly catch the 9am train to {Word}sville
 If you look up "{WORD}" in the dictionary, there's a picture of you underneath!
 I never want to see your {WORD}ing {WORD} again
+Don't talk to me or my {WORD} ever again
 
 INSULT,END
 you piece of {WORD}
